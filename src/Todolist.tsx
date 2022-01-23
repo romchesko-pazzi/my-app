@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useState, KeyboardEvent} from 'react';
 import {FilterValuesType} from './App';
 
 type TaskType = {
@@ -24,14 +24,28 @@ export function Todolist(props: PropsType) {
     }
 
     const onClickHandler = () => {
-        props.addTask(title);
+        if (title === "") {
+            return
+        }
+        props.addTask(title)
         setTitle("");
     }
+
+    const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === "Enter") {
+            onClickHandler();
+        }
+    }
+
+    const onClickFilterHandler = (value: FilterValuesType) => {
+        props.changeFilter(value);
+    }
+
 
     return <div>
         <h3>{props.title}</h3>
         <div>
-            <input value={title} onChange={onChangeHandler}/>
+            <input onKeyPress={onKeyPressHandler} value={title} onChange={onChangeHandler}/>
             <button onClick={onClickHandler}>+</button>
         </div>
         <ul>
@@ -47,21 +61,9 @@ export function Todolist(props: PropsType) {
             }
         </ul>
         <div>
-            <button onClick={() => {
-                props.changeFilter("all")
-            }}>
-                All
-            </button>
-            <button onClick={() => {
-                props.changeFilter("active")
-            }}>
-                Active
-            </button>
-            <button onClick={() => {
-                props.changeFilter("completed")
-            }}>
-                Completed
-            </button>
+            <button onClick={() => onClickFilterHandler("all")}>All</button>
+            <button onClick={() => onClickFilterHandler("active")}>Active</button>
+            <button onClick={() => onClickFilterHandler("completed")}>Completed</button>
         </div>
     </div>
 }
