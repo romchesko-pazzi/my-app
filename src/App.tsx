@@ -20,9 +20,9 @@ function App() {
         setTasks(filteredTasks);
     }
 
-    const addTask = (newTitle: string) => {
-        let newTask = {id: v1(), title: newTitle, isDone: false};
-        setTasks([newTask, ...tasks]);
+    const addTask = (newTask: string) => {
+        let newTasks = {id: v1(), title: newTask, isDone: false};
+        setTasks([newTasks, ...tasks]);
     }
 
     let [filter, setFilter] = useState<FilterValuesType>("all");
