@@ -1,6 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {FilterValuesType} from './App';
 import {ButtonRemove} from "./components/ButtonRemove";
+import {ButtonFilter} from "./components/ButtonFilter";
 
 type TaskType = {
     id: string
@@ -58,22 +59,18 @@ export function Todolist(props: PropsType) {
         <ul>
             {
                 props.tasks.map(t => {
-
-                    // const onClickHandler = () => props.removeTask(t.id)
-
                     return <li key={t.id}>
                         <input type="checkbox" checked={t.isDone}/>
                         <span>{t.title}</span>
                         <ButtonRemove name={"x"} callback={() => removeHandler(t.id)}/>
-                        {/*<button onClick={onClickHandler}>x</button>*/}
                     </li>
                 })
             }
         </ul>
         <div>
-            {/*<Button name={"all"} callback={() => onFilterHandler("all")}/>*/}
-            {/*<Button name={"active"} callback={() => onFilterHandler("active")}/>*/}
-            {/*<Button name={"completed"} callback={() => onFilterHandler("completed")}/>*/}
+            <ButtonFilter name={"all"} callback={() => onFilterHandler("all")}/>
+            <ButtonFilter name={"active"} callback={() => onFilterHandler("active")}/>
+            <ButtonFilter name={"completed"} callback={() => onFilterHandler("completed")}/>
         </div>
     </div>
 }
