@@ -4,6 +4,8 @@ import './App.css';
 
 import {Todolist} from './Todolist';
 
+export type FilterType = "all" | "active" | "completed";
+
 export function App() {
 
     // хук со стартовым значением
@@ -24,19 +26,17 @@ export function App() {
     //фильтрация по приоритету
     const [filter, setFilter] = useState("all")
 
-    const filterTask = (taskTitle: string) => {
+    const filterTask = (taskTitle: FilterType) => {
         setFilter(taskTitle);
     }
 
     let filteredTasks = tasks;
 
-    filter === "completed" ? filteredTasks = tasks.filter(f => f.isDone) : filteredTasks = tasks.filter(f => !f.isDone)
-
-    // if (filter === "completed") {
-    //     filteredTasks = tasks.filter(f => f.isDone)
-    // } else if (filter === "active") {
-    //     filteredTasks = tasks.filter(f => !f.isDone)
-    // }
+    if (filter === "completed") {
+        filteredTasks = tasks.filter(f => f.isDone)
+    } else if (filter === "active") {
+        filteredTasks = tasks.filter(f => !f.isDone)
+    }
 
 
     return (
