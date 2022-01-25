@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 import {v1} from 'uuid';
 import './App.css';
 
-import {Todolist} from './Todolist';
+import {TaskType, Todolist} from './Todolist';
 
 export type FilterType = "all" | "active" | "completed";
 
 export function App() {
 
     // хук со стартовым значением
-    const [tasks, setTasks] = useState([
+    const [tasks, setTasks] = useState<TaskType[]>([
         {id: v1(), title: "HTML&CSS", isDone: true},
         {id: v1(), title: "JS", isDone: true},
         {id: v1(), title: "ReactJS", isDone: false},
@@ -17,14 +17,13 @@ export function App() {
         {id: v1(), title: "GraphQL", isDone: false},
     ]);
 
-
     //удаление
     const deleteTask = (taskID: string) => {
         setTasks(tasks.filter(f => f.id !== taskID));
     }
 
     //фильтрация по приоритету
-    const [filter, setFilter] = useState("all")
+    const [filter, setFilter] = useState<FilterType>("all")
 
     const filterTask = (taskTitle: FilterType) => {
         setFilter(taskTitle);
@@ -38,6 +37,11 @@ export function App() {
         filteredTasks = tasks.filter(f => !f.isDone)
     }
 
+    //добавление
+    const addTask = (newTitle: string) => {
+        let newTask = {id: v1(), title: newTitle, isDone: false};
+        setTasks([newTask, ...tasks]);
+    }
 
     return (
         <div className="App">
@@ -45,6 +49,7 @@ export function App() {
                       tasks={filteredTasks}
                       deleteTask={deleteTask}
                       filterTask={filterTask}
+                      addTask={addTask}
             />
         </div>
     );
