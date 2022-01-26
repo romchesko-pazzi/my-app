@@ -43,7 +43,7 @@ export function App() {
         setTasks([newTask, ...tasks]);
     }
 
-    //checked true or false
+    //Checkbox status
     const changeStatus = (id:string,value: boolean) => {
         console.log(id,value)
     }
