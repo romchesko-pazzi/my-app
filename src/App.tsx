@@ -43,6 +43,12 @@ export function App() {
         setTasks([newTask, ...tasks]);
     }
 
+    //checked true or false
+    const changeStatus = (id:string,value: boolean) => {
+        console.log(id,value)
+    }
+
+
     return (
         <div className="App">
             <Todolist title={"TodoList"}
@@ -50,6 +56,7 @@ export function App() {
                       deleteTask={deleteTask}
                       filterTask={filterTask}
                       addTask={addTask}
+                      changeStatus={changeStatus}
             />
         </div>
     );

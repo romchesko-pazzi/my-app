@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState, KeyboardEvent} from 'react';
+import React, {ChangeEvent, useState, KeyboardEvent,} from 'react';
 import {FilterType} from "./App";
 
 export type TaskType = {
@@ -13,6 +13,7 @@ type PropsType = {
     deleteTask: (taskID: string) => void;
     filterTask: (taskTitle: FilterType) => void;
     addTask: (newTitle: string) => void;
+    changeStatus: (id: string, value: boolean) => void;
 }
 
 export function Todolist(props: PropsType) {
@@ -41,6 +42,9 @@ export function Todolist(props: PropsType) {
 
     const deleteHandler = (id: string) => props.deleteTask(id);
     const filterHandler = (title: FilterType) => props.filterTask(title);
+    const checkedHandler = (id: string, event: boolean) => {
+        props.changeStatus(id, event);
+    }
 
     return <div>
         <h3>{props.title}</h3>
@@ -50,9 +54,16 @@ export function Todolist(props: PropsType) {
         </div>
         <ul>
             {props.tasks.map(m => {
+                // const checkedHandler = (event: ChangeEvent<HTMLInputElement>) => {
+                //     props.changeStatus(m.id, event.currentTarget.checked);
+                // }
                 return (
                     <li key={m.id}>
-                        <input type="checkbox" checked={m.isDone}/><span>{m.title}</span>
+                        <input type="checkbox"
+                               checked={m.isDone}
+                               onChange={(e) => checkedHandler(m.id, e.currentTarget.checked)}
+                        />
+                        <span>{m.title}</span>
                         <button onClick={() => deleteHandler(m.id)}>delete</button>
                     </li>
                 )
