@@ -31,12 +31,16 @@ export function Todolist(props: PropsType) {
         props.addTask(valueOfInput);
         setValueOfInput("");
     }
+
     // Enter
     const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key === "Enter") {
             onClickAddHandler();
         }
     }
+
+    const deleteHandler = (id: string) => props.deleteTask(id);
+    const filterHandler = (title: FilterType) => props.filterTask(title);
 
     return <div>
         <h3>{props.title}</h3>
@@ -47,16 +51,17 @@ export function Todolist(props: PropsType) {
         <ul>
             {props.tasks.map(m => {
                 return (
-                    <li key={m.id}><input type="checkbox" checked={m.isDone}/><span>{m.title}</span>
-                        <button onClick={() => props.deleteTask(m.id)}>delete</button>
+                    <li key={m.id}>
+                        <input type="checkbox" checked={m.isDone}/><span>{m.title}</span>
+                        <button onClick={() => deleteHandler(m.id)}>delete</button>
                     </li>
                 )
             })}
         </ul>
         <div>
-            <button onClick={() => props.filterTask("all")}>all</button>
-            <button onClick={() => props.filterTask("active")}>active</button>
-            <button onClick={() => props.filterTask("completed")}>completed</button>
+            <button onClick={() => filterHandler("all")}>all</button>
+            <button onClick={() => filterHandler("active")}>active</button>
+            <button onClick={() => filterHandler("completed")}>completed</button>
         </div>
     </div>
 }
