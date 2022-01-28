@@ -1,8 +1,8 @@
 .error {
-    border: red 1px solid;
+    border: red 1.5px solid;
 }
 
-.error-message {
+.errorMessage {
     color: red;
 }
 

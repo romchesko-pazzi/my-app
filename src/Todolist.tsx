@@ -1,5 +1,6 @@
 import React, {ChangeEvent, useState, KeyboardEvent,} from 'react';
 import {FilterType} from "./App";
+import s from "./Todolist.module.css";
 
 export type TaskType = {
     id: string;
@@ -19,18 +20,23 @@ type PropsType = {
 export function Todolist(props: PropsType) {
 
     const [valueOfInput, setValueOfInput] = useState("");
+    // хук для ошибки
+    const [error, setError] = useState(false);
 
     //инпут
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        setError(false);
         setValueOfInput(event.currentTarget.value);
     }
 
     const onClickAddHandler = () => {
-        if (valueOfInput === "") {
-            return;
+        if (valueOfInput.trim() !== "") {
+            props.addTask(valueOfInput.trim());
+            setValueOfInput("");
         }
-        props.addTask(valueOfInput.trim());
-        setValueOfInput("");
+        if (valueOfInput === "") {
+            setError(true);
+        }
     }
 
     // Enter
@@ -49,16 +55,22 @@ export function Todolist(props: PropsType) {
     return <div>
         <h3>{props.title}</h3>
         <div>
-            <input onKeyPress={onKeyPressHandler} onChange={onChangeHandler} value={valueOfInput}/>
+            <input
+                className={error ? s.error : ""}
+                onKeyPress={onKeyPressHandler}
+                onChange={onChangeHandler}
+                value={valueOfInput}/>
             <button onClick={onClickAddHandler}>add</button>
+            {error && <div className={s.errorMessage}>Title is required!</div>}
         </div>
         <ul>
             {props.tasks.map(m => {
                 return (
                     <li key={m.id}>
-                        <input type="checkbox"
-                               checked={m.isDone}
-                               onChange={(e) => checkedHandler(m.id, e.currentTarget.checked)}
+                        <input
+                            type="checkbox"
+                            checked={m.isDone}
+                            onChange={(e) => checkedHandler(m.id, e.currentTarget.checked)}
                         />
                         <span>{m.title}</span>
                         <button onClick={() => deleteHandler(m.id)}>delete</button>
