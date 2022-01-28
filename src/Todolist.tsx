@@ -29,7 +29,7 @@ export function Todolist(props: PropsType) {
         if (valueOfInput === "") {
             return;
         }
-        props.addTask(valueOfInput);
+        props.addTask(valueOfInput.trim());
         setValueOfInput("");
     }
 

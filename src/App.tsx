@@ -44,8 +44,8 @@ export function App() {
     }
 
     //Checkbox status
-    const changeStatus = (id:string,value: boolean) => {
-        console.log(id,value)
+    const changeStatus = (id: string, value: boolean) => {
+        setTasks(tasks.map(m => m.id === id ? {...m, isDone: value} : m));
     }
 
 
