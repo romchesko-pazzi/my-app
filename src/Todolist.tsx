@@ -12,28 +12,24 @@ type PropsType = {
     title: string;
     tasks: Array<TaskType>;
     deleteTask: (taskID: string) => void;
-    // filterTask: (taskTitle: FilterType) => void;
     addTask: (newTitle: string) => void;
     changeStatus: (id: string, value: boolean) => void;
-    // filter: FilterType;
 }
 
 export function Todolist(props: PropsType) {
 
+    //фильтрация по приоритету
     const [filter, setFilter] = useState<FilterType>("all");
-
     const filterTask = (taskTitle: FilterType) => {
         setFilter(taskTitle);
     }
-
     let filteredTasks = props.tasks;
-
     if (filter === "completed") {
         filteredTasks = props.tasks.filter(f => f.isDone);
     } else if (filter === "active") {
         filteredTasks = props.tasks.filter(f => !f.isDone);
     }
-
+    //фильтрация по приоритету
 
     const [valueOfInput, setValueOfInput] = useState("");
     // хук для ошибки
@@ -95,13 +91,12 @@ export function Todolist(props: PropsType) {
             })}
         </ul>
         <div>
-            <button className={filter === "all" ? s.activeFilter : ""} onClick={() => filterHandler("all")}>all</button>
+            <button className={filter === "all" ? s.activeFilter : ""}
+                    onClick={() => filterHandler("all")}>all</button>
             <button className={filter === "active" ? s.activeFilter : ""}
-                    onClick={() => filterHandler("active")}>active
-            </button>
+                    onClick={() => filterHandler("active")}>active</button>
             <button className={filter === "completed" ? s.activeFilter : ""}
-                    onClick={() => filterHandler("completed")}>completed
-            </button>
+                    onClick={() => filterHandler("completed")}>completed</button>
         </div>
     </div>
 }
