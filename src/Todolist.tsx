@@ -1,6 +1,7 @@
 import React, {ChangeEvent, useState, KeyboardEvent,} from 'react';
 import {FilterType} from "./App";
 import s from "./Todolist.module.css";
+import {Button} from "./components/Button";
 
 export type TaskType = {
     id: string;
@@ -85,18 +86,18 @@ export function Todolist(props: PropsType) {
                             onChange={(e) => checkedHandler(m.id, e.currentTarget.checked)}
                         />
                         <span>{m.title}</span>
-                        <button onClick={() => deleteHandler(m.id)}>delete</button>
+                        <Button name={"delete"} callBack={() => deleteHandler(m.id)}/>
                     </li>
                 )
             })}
         </ul>
         <div>
-            <button className={filter === "all" ? s.activeFilter : ""}
-                    onClick={() => filterHandler("all")}>all</button>
-            <button className={filter === "active" ? s.activeFilter : ""}
-                    onClick={() => filterHandler("active")}>active</button>
-            <button className={filter === "completed" ? s.activeFilter : ""}
-                    onClick={() => filterHandler("completed")}>completed</button>
+            <Button name={"all"} callBack={() => filterHandler("all")}/>
+            <Button name={"active"} callBack={() => filterHandler("active")}/>
+            <Button name={"completed"} callBack={() => filterHandler("completed")}/>
+            {/*<button className={filter === "all" ? s.activeFilter : ""} onClick={() => filterHandler("all")}>all</button>*/}
+            {/*<button className={filter === "active" ? s.activeFilter : ""} onClick={() => filterHandler("active")}>active</button>*/}
+            {/*<button className={filter === "completed" ? s.activeFilter : ""} onClick={() => filterHandler("completed")}>completed</button>*/}
         </div>
     </div>
 }
