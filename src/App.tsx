@@ -23,19 +23,19 @@ export function App() {
     }
 
     //фильтрация по приоритету
-    const [filter, setFilter] = useState<FilterType>("all")
-
-    const filterTask = (taskTitle: FilterType) => {
-        setFilter(taskTitle);
-    }
-
-    let filteredTasks = tasks;
-
-    if (filter === "completed") {
-        filteredTasks = tasks.filter(f => f.isDone)
-    } else if (filter === "active") {
-        filteredTasks = tasks.filter(f => !f.isDone)
-    }
+    // const [filter, setFilter] = useState<FilterType>("all")
+    //
+    // const filterTask = (taskTitle: FilterType) => {
+    //     setFilter(taskTitle);
+    // }
+    //
+    // let filteredTasks = tasks;
+    //
+    // if (filter === "completed") {
+    //     filteredTasks = tasks.filter(f => f.isDone)
+    // } else if (filter === "active") {
+    //     filteredTasks = tasks.filter(f => !f.isDone)
+    // }
 
     //добавление
     const addTask = (newTitle: string) => {
@@ -52,12 +52,12 @@ export function App() {
     return (
         <div className="App">
             <Todolist title={"TodoList"}
-                      tasks={filteredTasks}
+                      tasks={tasks}
                       deleteTask={deleteTask}
-                      filterTask={filterTask}
+                      // filterTask={filterTask}
                       addTask={addTask}
                       changeStatus={changeStatus}
-                      filter={filter}
+                      // filter={filter}
             />
         </div>
     );
