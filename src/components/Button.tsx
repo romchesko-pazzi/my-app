@@ -4,7 +4,6 @@ import {FilterType} from "../App";
 type ButtonType = {
     name: string;
     callBack: () => void;
-
 }
 
 

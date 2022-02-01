@@ -2,6 +2,7 @@ import React, {ChangeEvent, useState, KeyboardEvent,} from 'react';
 import {FilterType} from "./App";
 import s from "./Todolist.module.css";
 import {Button} from "./components/Button";
+import {Input} from "./components/Input";
 
 export type TaskType = {
     id: string;
@@ -19,8 +20,10 @@ type PropsType = {
 
 export function Todolist(props: PropsType) {
 
-    //фильтрация по приоритету
     const [filter, setFilter] = useState<FilterType>("all");
+    const [valueOfInput, setValueOfInput] = useState("");
+    const [error, setError] = useState(false);
+
     const filterTask = (taskTitle: FilterType) => {
         setFilter(taskTitle);
     }
@@ -30,17 +33,13 @@ export function Todolist(props: PropsType) {
     } else if (filter === "active") {
         filteredTasks = props.tasks.filter(f => !f.isDone);
     }
-    //фильтрация по приоритету
 
-    const [valueOfInput, setValueOfInput] = useState("");
-    // хук для ошибки
-    const [error, setError] = useState(false);
 
     //инпут
-    const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        setError(false);
-        setValueOfInput(event.currentTarget.value);
-    }
+    // const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    //     setError(false);
+    //     setValueOfInput(event.currentTarget.value);
+    // }
 
     const onClickAddHandler = () => {
         if (valueOfInput.trim() !== "") {
@@ -53,11 +52,11 @@ export function Todolist(props: PropsType) {
     }
 
     // Enter
-    const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === "Enter") {
-            onClickAddHandler();
-        }
-    }
+    // const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+    //     if (event.key === "Enter") {
+    //         onClickAddHandler();
+    //     }
+    // }
 
     const deleteHandler = (id: string) => props.deleteTask(id);
     const filterHandler = (title: FilterType) => filterTask(title);
@@ -68,11 +67,12 @@ export function Todolist(props: PropsType) {
     return <div>
         <h3>{props.title}</h3>
         <div>
-            <input
-                className={error ? s.error : ""}
-                onKeyPress={onKeyPressHandler}
-                onChange={onChangeHandler}
-                value={valueOfInput}/>
+            <Input/>
+            {/*<input*/}
+            {/*    className={error ? s.error : ""}*/}
+            {/*    onKeyPress={onKeyPressHandler}*/}
+            {/*    onChange={onChangeHandler}*/}
+            {/*    value={valueOfInput}/>*/}
             <button onClick={onClickAddHandler}>add</button>
             {error && <div className={s.errorMessage}>Title is required!</div>}
         </div>
