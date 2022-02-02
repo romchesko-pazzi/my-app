@@ -34,8 +34,7 @@ export function Todolist(props: PropsType) {
         filteredTasks = props.tasks.filter(f => !f.isDone);
     }
 
-
-    //инпут
+    // инпут
     // const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     //     setError(false);
     //     setValueOfInput(event.currentTarget.value);
@@ -67,14 +66,19 @@ export function Todolist(props: PropsType) {
     return <div>
         <h3>{props.title}</h3>
         <div>
-            <Input/>
+            <Input valueOfInput={valueOfInput}
+                   setValueOfInput={setValueOfInput}
+                   error={error}
+                   setError={setError}
+            />
             {/*<input*/}
             {/*    className={error ? s.error : ""}*/}
             {/*    onKeyPress={onKeyPressHandler}*/}
             {/*    onChange={onChangeHandler}*/}
             {/*    value={valueOfInput}/>*/}
-            <button onClick={onClickAddHandler}>add</button>
-            {error && <div className={s.errorMessage}>Title is required!</div>}
+            <Button name={"add"} callBack={onClickAddHandler}/>
+            {/*<button onClick={onClickAddHandler}>add</button>*/}
+            {/*{error && <div className={s.errorMessage}>Title is required!</div>}*/}
         </div>
         <ul>
             {filteredTasks.map(m => {

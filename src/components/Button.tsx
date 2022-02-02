@@ -1,13 +1,12 @@
 import React from "react";
-import {FilterType} from "../App";
 
 type ButtonType = {
     name: string;
     callBack: () => void;
 }
 
-
 export const Button = (props: ButtonType) => {
+
     const onClickHandler = () => {
         props.callBack()
     }

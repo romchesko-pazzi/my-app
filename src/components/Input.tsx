@@ -1,26 +1,34 @@
 import s from "../Todolist.module.css";
-import React, {ChangeEvent, KeyboardEvent} from "react";
+import React, {ChangeEvent, KeyboardEvent,} from "react";
 
-export const Input = () => {
+type InputType = {
+    valueOfInput: string;
+    setValueOfInput: (v: string) => void;
+    error: boolean
+    setError: (v: boolean) => void;
+}
 
-    const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        setError(false);
-        setValueOfInput(event.currentTarget.value);
-    }
+
+export const Input = (props: InputType) => {
 
     const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === "Enter") {
-            onClickAddHandler();
-        }
+        // if (event.key === "Enter") {
+        //     onClickAddHandler();
+        // }
+    }
+    const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        props.setError(false);
+        props.setValueOfInput(event.currentTarget.value);
     }
 
     return (
         <div>
             <input
-                className={error ? s.error : ""}
+                className={props.error ? s.error : ""}
                 onKeyPress={onKeyPressHandler}
                 onChange={onChangeHandler}
-                value={valueOfInput}/>
+                value={props.valueOfInput}/>
+            {props.error && <div className={s.errorMessage}>Title is required!</div>}
         </div>
     )
 }
