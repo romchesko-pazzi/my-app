@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {FilterType} from "./App";
 import {Button} from "./components/Button/Button";
 import {Input} from "./components/Input/Input";
+import s from "./Todolist.module.css";
 
 export type TaskType = {
     id: string;
@@ -63,9 +64,9 @@ export function Todolist(props: PropsType) {
         <ul>
             {filteredTasks.map(m => {
                 return (
-                    <li key={m.id}>
+                    <li key={m.id} className={m.isDone ? s.isDone : ""}>
                         <input
-                            type="checkbox"
+                            type={"checkbox"}
                             checked={m.isDone}
                             onChange={(e) => checkedHandler(m.id, e.currentTarget.checked)}
                         />
@@ -76,9 +77,12 @@ export function Todolist(props: PropsType) {
             })}
         </ul>
         <div>
-            <Button name={"all"} callBack={() => filterHandler("all")}/>
-            <Button name={"active"} callBack={() => filterHandler("active")}/>
-            <Button name={"completed"} callBack={() => filterHandler("completed")}/>
+            <Button filter={filter === "all" ? filter : ""} name={"all"}
+                    callBack={() => filterHandler("all")}/>
+            <Button filter={filter === "active" ? filter : ""} name={"active"}
+                    callBack={() => filterHandler("active")}/>
+            <Button filter={filter === "completed" ? filter : ""} name={"completed"}
+                    callBack={() => filterHandler("completed")}/>
         </div>
     </div>
 }
