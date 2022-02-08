@@ -5,12 +5,6 @@
 .errorMessage {
     color: red;
 }
-
-.activeFilter {
-    background-color: aquamarine;
-}
-
-.isDoneStyle {
+.isDone {
     opacity: 0.5;
 }
-
