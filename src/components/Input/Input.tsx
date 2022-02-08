@@ -22,13 +22,13 @@ export const Input = ({valueOfInput, setValueOfInput, error, setError, enter,}: 
     }
 
     return (
-        <div>
+        <>
             <input
                 className={error ? s.error : ""}
                 onKeyPress={onKeyPressHandler}
                 onChange={onChangeHandler}
                 value={valueOfInput}/>
             {error && <div className={s.errorMessage}>Title is required!</div>}
-        </div>
+        </>
     )
 }

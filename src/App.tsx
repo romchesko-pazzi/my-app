@@ -4,7 +4,7 @@ import './App.css';
 
 import {TaskType, Todolist} from './Todolist';
 
-export type FilterType = "all" | "active" | "completed";
+export type FilterType = "all" | "active" | "completed"| "";
 
 export function App() {
 
