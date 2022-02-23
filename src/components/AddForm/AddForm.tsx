@@ -3,11 +3,12 @@ import {Button} from "../Button/Button";
 import s from "../../Todolist.module.css"
 
 type AddFormPropsType = {
-    callback: (title: string) => void
+    callback: (title: string) => void,
+    name:string,
 }
 
 export const AddForm = (props: AddFormPropsType) => {
-    const {callback} = props
+    const {callback,name} = props
     const [value, setValue] = useState("");
     const [error, setError] = useState(false);
 
@@ -36,7 +37,7 @@ export const AddForm = (props: AddFormPropsType) => {
     return (
         <div>
             <input value={value} onChange={onChangeHandler} onKeyPress={onKeyPressHandler}/>
-            <Button name={"add TD"} callBack={onClickHandler}/>
+            <Button name={name} callBack={onClickHandler}/>
             {error ? <div className={s.errorMessage}>Title is required</div> : ""}
         </div>
     );

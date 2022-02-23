@@ -59,15 +59,13 @@ export function App() {
     const updateTodolistTitle = (todolistID: string, newTitle: string) => {
         setTodolists(todolists.map(m => m.id === todolistID ? {...m, title: newTitle} : m));
     }
-    console.log(todolists)
-
     const renameTodolistTask = (todolistID: string, taskID: string, newTitle: string) => {
         setTasks({...tasks, [todolistID]: tasks[todolistID].map(m => m.id === taskID ? {...m, title: newTitle} : m)})
     }
     console.log(tasks)
     return (
         <div className="App">
-            <AddForm callback={addTodoList}/>
+            <AddForm name={"add todolist"} callback={addTodoList}/>
             {todolists.map((m, index) => {
                 return (
                     <Todolist
@@ -79,6 +77,7 @@ export function App() {
                         addTask={addTask}
                         changeStatus={changeStatus}
                         updateTodolistTitle={updateTodolistTitle}
+                        renameTodolistTask={renameTodolistTask}
                     />
                 )
             })}
