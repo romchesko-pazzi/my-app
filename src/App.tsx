@@ -61,6 +61,10 @@ export function App() {
     }
     console.log(todolists)
 
+    const renameTodolistTask = (todolistID: string, taskID: string, newTitle: string) => {
+        setTasks({...tasks, [todolistID]: tasks[todolistID].map(m => m.id === taskID ? {...m, title: newTitle} : m)})
+    }
+    console.log(tasks)
     return (
         <div className="App">
             <AddForm callback={addTodoList}/>
