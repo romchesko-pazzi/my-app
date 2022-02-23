@@ -30,6 +30,7 @@ export const EditableSpan = (props: EditableSpanPropsType) => {
                 onChange={onChangeHandler}
                 onBlur={onBlurHandler}
                 value={value}
+                autoFocus
                 type="text"/> : <span onDoubleClick={onDoubleClickHandler}>{name}</span>}
         </>
     );
